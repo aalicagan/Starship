@@ -1,2 +1,2 @@
 # star-wars
-You can find explanation and instroduction at wiki page.
+You can find explanation and instructions at wiki page.
