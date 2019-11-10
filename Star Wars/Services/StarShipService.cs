@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
 using System.Linq;
+using Star_Wars.Services;
+using System.Threading.Tasks;
+
 namespace Star_Wars
 {
-    public class StarShipService
+    public class StarShipService : IService
     {
         string _baseUrl => "https://swapi.co/api/starships/?page=1";
         public long Distance = -1;
@@ -19,10 +22,10 @@ namespace Star_Wars
         {
             _config = InitConfig();
             Map = _config.CreateMapper();
-            _requestBase = new RequestBase<ResponseDTO>();
+            _requestBase = Bootstrap.container.GetInstance<RequestBase<ResponseDTO>>();
             _starshipList = new List<Starship>();
         }
-        
+
         private MapperConfiguration InitConfig()
         {
             return new MapperConfiguration(cfg =>

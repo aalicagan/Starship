@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Star_Wars.Helper;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace Star_Wars
 {
-    public class RequestBase<T>
+    public class RequestBase<T> : IRequestBase<T>
     {
         T Deserialize(string input)
         {

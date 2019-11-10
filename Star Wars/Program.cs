@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SimpleInjector;
 using Star_Wars.DTO;
 using System;
 using System.Linq;
@@ -10,7 +11,8 @@ namespace Star_Wars
         static StarShipService service;
         static void Main(string[] args)
         {
-            service = new StarShipService();
+            Bootstrap.Start();
+            service = Bootstrap.container.GetInstance<StarShipService>();
             do
             {
                 Console.Clear();
