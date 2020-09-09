@@ -14,7 +14,7 @@ namespace Star_Wars
         }
         public async Task<ResponseDTO> GetDataAsync(string url)
         {
-            return _requestBase.CallApi(url);
+            return await _requestBase.CallApiAsync(url);
         }
     }
 }

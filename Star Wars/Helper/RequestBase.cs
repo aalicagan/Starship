@@ -2,12 +2,13 @@
 using Star_Wars.Helper;
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Star_Wars
 {
     public class RequestBase<T> : IRequestBase<T>
     {
-        T Deserialize(string input)
+        async Task<T> Deserialize(string input)
         {
             return JsonConvert.DeserializeObject<T>(input);
         }
@@ -16,7 +17,7 @@ namespace Star_Wars
         /// </summary>
         /// <param name="url"></param>
         /// <returns> </returns>
-        public T CallApi(string url)
+        public async Task<T> CallApiAsync(string url)
         {
             using var httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(url);
@@ -24,10 +25,10 @@ namespace Star_Wars
             httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Encoding", "identity");
 
             HttpResponseMessage response = new HttpResponseMessage();
-            response = httpClient.GetAsync(url).Result;
+            response = await httpClient.GetAsync(url);
 
             if (!response.IsSuccessStatusCode) throw new Exception($"{url} return unsuccessfull");
-            return Deserialize(response.Content.ReadAsStringAsync().Result);
+            return await Deserialize(response.Content.ReadAsStringAsync().Result);
         }
     }
 }

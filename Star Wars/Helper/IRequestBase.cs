@@ -1,7 +1,9 @@
-﻿namespace Star_Wars.Helper
+﻿using System.Threading.Tasks;
+
+namespace Star_Wars.Helper
 {
     public interface IRequestBase<T>
     {
-        public T CallApi(string url);
+        public Task<T> CallApiAsync(string url);
     }
 }

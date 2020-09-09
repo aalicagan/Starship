@@ -23,8 +23,9 @@ namespace Star_Wars.Client
         /// Call API to get data and find resupply count for each Starship
         /// </summary>
         /// <param name="distance"></param>
-        public async void Execute(long distance)
+        public async Task Execute(long distance)
         {
+            if (distance < 0) throw new Exception("Distance must be greater than zero");
             StarshipList = new List<Starship>();
             Distance = distance;
             string nextUrl = BaseUrl;
@@ -42,7 +43,7 @@ namespace Star_Wars.Client
         /// Get Starship count
         /// </summary>
         /// <returns></returns>
-        public int GetCount()
+        public async Task<int> GetCount()
         {
             if (StarshipList == null)
                 throw new Exception("No Data Found");

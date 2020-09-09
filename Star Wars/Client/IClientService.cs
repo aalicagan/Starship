@@ -6,8 +6,8 @@ namespace Star_Wars
 {
     public interface IClientService
     {
-        public void Execute(long distance);
+        public Task Execute(long distance);
         public Task<int> CalculateReSupplyFrequence(List<Starship> starships);
-        public int GetCount();
+        public Task<int> GetCount();
     }
 }
