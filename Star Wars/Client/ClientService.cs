@@ -25,7 +25,7 @@ namespace Star_Wars.Client
         /// <param name="distance"></param>
         public async Task Execute(long distance)
         {
-            if (distance < 0) throw new Exception("Distance must be greater than zero");
+            if (distance <= 0) throw new Exception("Distance must be greater than zero");
             StarshipList = new List<Starship>();
             Distance = distance;
             string nextUrl = BaseUrl;

@@ -4,6 +4,7 @@ using Star_Wars;
 using Star_Wars.DTO;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Assert = NUnit.Framework.Assert;
 namespace StarWarsUnitTest
 {
@@ -35,36 +36,31 @@ namespace StarWarsUnitTest
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException),
-    "Distance must be greater than zero")]
-        public void TestExecuteWrongDistance()
+        public async Task TestExecuteWrongDistanceAsync()
         {
             Bootstrap.Start();
             IClientService service = Bootstrap.container.GetInstance<IClientService>();
-            service.Execute(-1000);
+            Assert.ThrowsAsync<Exception>(async () => await service.Execute(-1000));
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException),
-    "Distance must be greater than zero")]
-        public void TestExecuteWrongDistance2()
+        public async Task TestExecuteWrongDistance2Async()
         {
             Bootstrap.Start();
             IClientService service = Bootstrap.container.GetInstance<IClientService>();
-            service.Execute(0);
+            Assert.ThrowsAsync<Exception>(async () => await service.Execute(0));
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), "No Data Found")]
-        public async System.Threading.Tasks.Task TestGetCountAsync()
+        public async Task TestGetCountAsync()
         {
             Bootstrap.Start();
             IClientService service = Bootstrap.container.GetInstance<IClientService>();
-            await service.GetCount();
+            Assert.ThrowsAsync<Exception>(async () => await service.GetCount());
         }
 
         [Test]
-        public async System.Threading.Tasks.Task TestCalculateReSupplyFrequenceAsync()
+        public async Task TestCalculateReSupplyFrequenceAsync()
         {
             Bootstrap.Start();
             IClientService service = Bootstrap.container.GetInstance<IClientService>();
