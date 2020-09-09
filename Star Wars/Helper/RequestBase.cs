@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Star_Wars.Helper;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 
 namespace Star_Wars
 {
@@ -20,20 +18,16 @@ namespace Star_Wars
         /// <returns> </returns>
         public T CallApi(string url)
         {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.BaseAddress = new Uri(url);
-                httpClient.DefaultRequestHeaders.Accept.Clear();
-                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Encoding", "identity");
+            using var httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(url);
+            httpClient.DefaultRequestHeaders.Accept.Clear();
+            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Encoding", "identity");
 
-                HttpResponseMessage response = new HttpResponseMessage();
-                response = httpClient.GetAsync(url).Result;
+            HttpResponseMessage response = new HttpResponseMessage();
+            response = httpClient.GetAsync(url).Result;
 
-                if (response.IsSuccessStatusCode)
-                    return Deserialize(response.Content.ReadAsStringAsync().Result);
-
-                return default;
-            }
+            if (!response.IsSuccessStatusCode) throw new Exception($"{url} return unsuccessfull");
+            return Deserialize(response.Content.ReadAsStringAsync().Result);
         }
     }
 }

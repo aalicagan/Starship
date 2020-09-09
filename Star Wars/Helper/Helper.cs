@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Star_Wars.Helper
+﻿namespace Star_Wars.Helper
 {
     public static class Helper
     {
